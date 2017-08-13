@@ -20,7 +20,8 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp bashrc ~/.bashrc
 cp vimrc ~/.vimrc
 cp gitconfig ~/.gitconfig
-cp build /usr/local/bin
+mkdir -p ~/bin
+cp build ~/bin/
 
 source ~/.bashrc
 vim +PluginInstall +qall
