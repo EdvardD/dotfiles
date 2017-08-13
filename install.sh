@@ -5,7 +5,7 @@ os_name=`uname`
 if [[ "$os_name" == "Linux" ]]; then
   apt-get install cmake
   apt-get install vim
-  apt-get install g++-7
+  apt-get install g++7
   apt-get install ack-grep
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
