@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+mkdir bdir
+cd bdir
+cmake ..
+make -j20 $1
+cd ..
