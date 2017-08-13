@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+DIR=$(dirname $0)
+
 os_name=`uname`
 
 if [[ "$os_name" == "Linux" ]]; then
@@ -17,11 +19,11 @@ fi
 rm -rf ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-cp bashrc ~/.bashrc
-cp vimrc ~/.vimrc
-cp gitconfig ~/.gitconfig
+cp $DIR/bashrc ~/.bashrc
+cp $DIR/vimrc ~/.vimrc
+cp $DIR/gitconfig ~/.gitconfig
 mkdir -p ~/bin
-cp build ~/bin/
+cp $DIR/build ~/bin/
 
 source ~/.bashrc
 vim +PluginInstall +qall
