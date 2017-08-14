@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-mkdir bdir
+mkdir -p bdir
 cd bdir
 cmake ..
 make -j20 $1
