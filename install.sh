@@ -18,6 +18,9 @@ fi
 
 rm -rf ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer
+cd $DIR
 
 cp $DIR/bashrc ~/.bashrc
 cp $DIR/vimrc ~/.vimrc
