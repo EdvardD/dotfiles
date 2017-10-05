@@ -50,3 +50,7 @@ source ~/.bashrc
 
 echo Install vim plugins
 vim +PluginInstall +qall
+
+echo Install molokai vim colors
+mkdir -p ~/.vim/colors
+cp molokai.vim ~/.vim/colors/

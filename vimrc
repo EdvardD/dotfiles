@@ -70,7 +70,7 @@ set smartcase
 set hlsearch
 
 " Compiling by F7, running by F9
-nmap <F7> :w<CR>:!g++-7 -Wno-deprecated -Wno-deprecated-declarations -Wall -Wextra -Wconversion -lm -s -x c++ -DSU1 -O2 -pthread -std=c++11 -o %:r %<CR>
+nmap <F7> :w<CR>:!g++-7 -Wno-deprecated -Wno-deprecated-declarations -Wall -Wextra -Wconversion -lm -x c++ -DSU1 -O2 -pthread -std=c++14 -o %:r %<CR>
 nmap <F9> :!./%:r<CR>
 
 " Ignore special symbols in find/replace
@@ -189,3 +189,13 @@ nnoremap <C-u> :YcmCompleter GoToReferences<CR>
 set completeopt-=preview " Don't show function/variable preview on the top
 let g:ycm_confirm_extra_conf=0 " Hide notification about found .ycm_extra_conf.py
 let g:ycm_goto_buffer_command='new-tab' " Go to in new tab
+
+" Vim-go settings.
+colorscheme molokai
+let g:go_disable_autoinstall = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:neocomplete#enable_at_startup = 1
