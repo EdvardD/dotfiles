@@ -192,6 +192,7 @@ let g:ycm_goto_buffer_command='new-tab' " Go to in new tab
 
 " Vim-go settings.
 colorscheme molokai
+let g:go_fmt_command = "goimports"
 let g:go_disable_autoinstall = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
