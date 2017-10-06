@@ -37,8 +37,8 @@ cd $DIR
 
 echo Install command-t
 rm -rf ~/.vim/bundle/command-t/ruby
-git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t/ruby
-cd ~/.vim/bundle/command-t/ruby/ruby/command-t/ext/command-t
+git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t
+cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
 ruby extconf.rb
 make
 cd $DIR
@@ -53,12 +53,12 @@ cp $DIR/build ~/bin/
 echo Update bashrc
 source ~/.bashrc
 
-echo Install vim plugins
-vim +PluginInstall +qall
-
 echo Install molokai vim colors
 mkdir -p ~/.vim/colors
 cp molokai.vim ~/.vim/colors/
+
+echo Install vim plugins
+vim +PluginInstall +qall
 
 echo Install Go binaries
 vim +GoInstallBinaries +qall
