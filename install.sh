@@ -6,14 +6,14 @@ os_name=`uname`
 
 echo Install cmake, vim, g++, ack and ruby
 if [[ "$os_name" == "Linux" ]]; then
-  sudo apt-get install cmake
-  sudo apt-get install vim
-  sudo apt-get install g++7
-  sudo apt-get install ack-grep
-  sudo apt-get install ruby-dev
+  sudo apt-get --assume-yes install cmake
+  sudo apt-get --assume-yes install vim
+  sudo apt-get --assume-yes install g++7
+  sudo apt-get --assume-yes install ack-grep
+  sudo apt-get --assume-yes install ruby-dev
   sudo add-apt-repository ppa:longsleep/golang-backports
   sudo apt-get update
-  sudo apt-get install golang-go
+  sudo apt-get --assume-yes install golang-go
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
   brew install vim || brew upgrade vim
