@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-DIR=$(dirname $0)
+DIR=`pwd`
 
 os_name=`uname`
 
@@ -19,7 +19,7 @@ elif [[ "$os_name" == "Darwin" ]]; then
   brew install vim || brew upgrade vim
   brew install gcc || brew upgrade gcc
   brew install ack || brew upgrade ack
-  brew install ruby-dev || brew upgrade ruby-dev
+  brew install ruby || brew upgrade ruby
   brew install go || brew upgrade go
 fi
 
@@ -28,12 +28,17 @@ rm -rf ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo Install YCM
+rm -rf ~/.vim/bundle/YouCompleteMe
+git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
 cd ~/.vim/bundle/YouCompleteMe
+git submodule update --init --recursive
 ./install.py --clang-completer --gocode-completer
 cd $DIR
 
 echo Install command-t
-cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
+rm -rf ~/.vim/bundle/command-t/ruby
+git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t/ruby
+cd ~/.vim/bundle/command-t/ruby/ruby/command-t/ext/command-t
 ruby extconf.rb
 make
 cd $DIR
@@ -54,3 +59,6 @@ vim +PluginInstall +qall
 echo Install molokai vim colors
 mkdir -p ~/.vim/colors
 cp molokai.vim ~/.vim/colors/
+
+echo Install Go binaries
+vim +GoInstallBinaries +qall
