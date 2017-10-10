@@ -120,7 +120,7 @@ fi
 trap 'pwd  > ~/.lastdir' EXIT
 [ -s ~/.lastdir ] && cd "`cat ~/.lastdir`"
 
-alias ls="ls -G"
+#alias ls="ls -G"
 
 cd() { builtin cd "$@" && ls; }
 .() { builtin cd . && ls && git st && jobs; }
