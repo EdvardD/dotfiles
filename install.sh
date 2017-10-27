@@ -11,9 +11,9 @@ if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get --assume-yes install g++7
   sudo apt-get --assume-yes install ack-grep
   sudo apt-get --assume-yes install ruby-dev
-  sudo add-apt-repository ppa:longsleep/golang-backports
-  sudo apt-get update
   sudo apt-get --assume-yes install golang-go
+  sudo apt-get --assume-yes install python
+  sudo apt-get --assume-yes install python3
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
   brew install vim || brew upgrade vim
@@ -21,6 +21,8 @@ elif [[ "$os_name" == "Darwin" ]]; then
   brew install ack || brew upgrade ack
   brew install ruby || brew upgrade ruby
   brew install go || brew upgrade go
+  brew install python || brew upgrade python
+  brew install python3 || brew upgrade python3
 fi
 
 echo Install Vundle
