@@ -120,15 +120,34 @@ fi
 trap 'pwd  > ~/.lastdir' EXIT
 [ -s ~/.lastdir ] && cd "`cat ~/.lastdir`"
 
-#alias ls="ls -G"
-
 cd() { builtin cd "$@" && ls; }
-.() { builtin cd . && ls && git st && jobs; }
+.() {
+  builtin cd .;
+
+  ls;
+  if [ -d .git ]; then
+    git st;
+  fi
+
+  echo
+  jobs;
+
+  echo
+  for i in {1..10}; do
+    if [ -d ~/dm${i} ]; then
+      builtin cd ~/dm${i};
+      git status | grep "On branch" | xargs echo dm${i};
+      builtin cd - > /dev/null 2>&1;
+    fi
+  done
+}
 ..() { builtin cd .. && ls; }
 ../..() { builtin cd ../.. && ls; }
 ../../..() { builtin cd ../../.. && ls; }
 ../../../..() { builtin cd ../../../.. && ls; }
 ../../../../..() { builtin cd ../../../../.. && ls; }
+../../../../../..() { builtin cd ../../../../../.. && ls; }
+../../../../../../..() { builtin cd ../../../../../../.. && ls; }
 
 st() {
   clear;
@@ -197,4 +216,42 @@ ssh() {
   command ssh -Y -A "$@";
 }
 
+short_test() {
+  go test ./... -short;
+}
+
+full_test() {
+  go test ./...;
+}
+
 export LC_ALL="en_US.UTF-8"
+export GOPATH="/home/edavtyan/go"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export KUBECONFIG=$HOME/admin.conf
+
+fbr() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+fbr_all() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
