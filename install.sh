@@ -14,6 +14,8 @@ if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get --assume-yes install golang-go
   sudo apt-get --assume-yes install python
   sudo apt-get --assume-yes install python3
+  sudo apt-get --assume-yes install python-pip
+  sudo apt-get --assume-yes install python-pip3
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
   brew install vim || brew upgrade vim
