@@ -8,7 +8,7 @@ echo Install cmake, vim, g++, ack and ruby
 if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get --assume-yes install cmake
   sudo apt-get --assume-yes install vim
-  sudo apt-get --assume-yes install g++7
+  sudo apt-get --assume-yes install g++-7
   sudo apt-get --assume-yes install ack-grep
   sudo apt-get --assume-yes install ruby-dev
   sudo apt-get --assume-yes install golang-go
