@@ -47,11 +47,11 @@ make
 cd $DIR
 
 echo Install dotfiles
-cp $DIR/bashrc ~/.bashrc
-cp $DIR/vimrc ~/.vimrc
-cp $DIR/gitconfig ~/.gitconfig
+cp bashrc ~/.bashrc
+cp vimrc ~/.vimrc
+cp gitconfig ~/.gitconfig
 mkdir -p ~/bin
-cp $DIR/build ~/bin/
+cp build ~/bin/
 
 echo Update bashrc
 source ~/.bashrc
