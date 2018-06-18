@@ -44,7 +44,7 @@ git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t
 cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
 ruby extconf.rb
 make
-cd $DIR
+cd $DIR/dotfiles
 
 echo Install dotfiles
 cp bashrc ~/.bashrc
