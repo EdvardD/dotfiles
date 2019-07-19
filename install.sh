@@ -38,14 +38,6 @@ git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouComplet
 cd ~/.vim/bundle/YouCompleteMe
 git submodule update --init --recursive
 ./install.py --clang-completer --gocode-completer
-cd $DIR
-
-echo Install command-t
-rm -rf ~/.vim/bundle/command-t/ruby
-git clone https://github.com/wincent/command-t.git ~/.vim/bundle/command-t
-cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
-ruby extconf.rb
-make
 cd $DIR/dotfiles
 
 echo Install dotfiles
