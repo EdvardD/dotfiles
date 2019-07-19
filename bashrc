@@ -131,15 +131,6 @@ cd() { builtin cd "$@" && ls; }
 
   echo
   jobs;
-
-  echo
-  for i in {1..10}; do
-    if [ -d ~/dm${i} ]; then
-      builtin cd ~/dm${i};
-      git status | grep "On branch" | xargs echo dm${i};
-      builtin cd - > /dev/null 2>&1;
-    fi
-  done
 }
 ..() { builtin cd .. && ls; }
 ../..() { builtin cd ../.. && ls; }
@@ -225,7 +216,7 @@ full_test() {
 }
 
 export LC_ALL="en_US.UTF-8"
-export GOPATH="/home/edavtyan/go"
+export GOPATH="$HOME/go"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export KUBECONFIG=$HOME/admin.conf
