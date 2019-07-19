@@ -9,6 +9,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'wincent/command-t'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -200,3 +202,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:neocomplete#enable_at_startup = 1
+
+" Fuzzy search over buffers
+nnoremap ; :Buffers<CR>
