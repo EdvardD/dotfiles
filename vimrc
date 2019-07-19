@@ -6,13 +6,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'wincent/command-t'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
 call vundle#end()
+
 filetype plugin indent on
 
 " Don't create swap files
@@ -26,7 +25,6 @@ set go+=a
 set autoindent
 " Smart indents
 filetype plugin indent on
-"set smartindent
 " Enable syntax highighting
 syntax on
 
@@ -51,13 +49,19 @@ set scrolloff=10
 
 " Show tabs even only one exists
 set showtabline=2
+
+" Open vertical split on the right side from current buffer
+set splitright
+" Open horizontal split on below current buffer
+set splitbelow
+
 " Navigate over tabs
 noremap <S-Tab> gT
 noremap <Tab> gt
 
-" Navigate over buffers
-noremap <C-n> gT
-noremap <C-p> gt
+" Close file by ctrl-q
+nnoremap <C-q> :q<CR>
+nnoremap <C-u> :bd<CR>
 
 " Inverse color for selecting
 hi Visual ctermfg=none ctermbg=none cterm=inverse
@@ -77,6 +81,7 @@ nmap <F9> :!./%:r<CR>
 
 " Ignore special symbols in find/replace
 set nomagic
+
 " Replacing from current line with global & confirm flags by R. Example: :R/old/new
 :command! -nargs=1 R .,$s<args>/gc
 
@@ -122,29 +127,6 @@ set wildignore=*.o,*~,*.pyc
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" Delete trailing white spaces after each write
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.* :call DeleteTrailingWS()
-
-" NERDTree settings
-nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
-" Show bookmarks on startup
-let NERDTreeShowBookmarks=1
-" Change working directory to the new root
-"let NERDTreeChDirMode=2
-" Hide NERD on each open
-let NERDTreeQuitOnOpen=1
-" Show hidden files
-let NERDTreeShowHidden=1
-" Disable display of the 'Bookmarks' label and 'Press ? for help' text
-let NERDTreeMinimalUI=1
-" Store bookmarks in FS
-let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
-
 " Reload vimrc after saving it
 if has("autocmd")
   autocmd! bufwritepost .vimrc source $MYVIMRC
@@ -160,40 +142,44 @@ nnoremap N Nzz
 nnoremap * *zz
 nnoremap # #zz
 
-" Y from cursor position to the end of line
+" Copy from cursor position to the end of line
 nnoremap Y y$
+
+" Delete trailing white spaces after each write
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.* :call DeleteTrailingWS()
 
 " Load previous session. Only available when compiled with the +viminfo feature
 set viminfo='10,\"100,:20,%,n~/.viminfo
 " Set cursor to its last position
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-" Doesn't work right now
-" Show in tab name only number, name and +- sign
-set guitablabel=\[%N\]\ %t\ %M
-
-" Indentation according AIMTech codestyle
+" Smart indentation
 set cino=N-s,g0,+2s,l-s,i2s
-
-" Persistent current directory
-set autochdir
 
 " Highlight long lines
 set colorcolumn=101
 
 " Shortcuts for next and previous buffers
-:nnoremap <C-n> :bnext<CR>
-:nnoremap <C-p> :bprevious<CR>
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprevious<CR>
 
-" YCM options.
-nnoremap <C-g> :YcmCompleter GoToImprecise<CR>
-nnoremap <C-u> :YcmCompleter GoToReferences<CR>
-set completeopt-=preview " Don't show function/variable preview on the top
-let g:ycm_confirm_extra_conf=0 " Hide notification about found .ycm_extra_conf.py
-let g:ycm_goto_buffer_command='new-tab' " Go to in new tab
+colorscheme molokai
+
+" NERDTree settings
+nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
+" Hide NERD on each open
+let NERDTreeQuitOnOpen=1
+" Show hidden files
+let NERDTreeShowHidden=1
+" Disable display of the 'Bookmarks' label and 'Press ? for help' text
+let NERDTreeMinimalUI=1
 
 " Vim-go settings.
-colorscheme molokai
 let g:go_fmt_command = "goimports"
 let g:go_disable_autoinstall = 0
 let g:go_highlight_functions = 1
@@ -203,5 +189,38 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:neocomplete#enable_at_startup = 1
 
-" Fuzzy search over buffers
+" FZF
 nnoremap ; :Buffers<CR>
+nnoremap , :Files<CR>
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" YCM options.
+nnoremap <C-g> :YcmCompleter GoToImprecise<CR>
+set completeopt-=preview " Don't show function/variable preview on the top
+let g:ycm_confirm_extra_conf=0 " Hide notification about found .ycm_extra_conf.py
+let g:ycm_goto_buffer_command='new-tab' " Go to in new tab
