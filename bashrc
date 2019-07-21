@@ -215,11 +215,7 @@ full_test() {
   go test ./...;
 }
 
-export LC_ALL="en_US.UTF-8"
-export GOPATH="$HOME/go"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export KUBECONFIG=$HOME/admin.conf
 
 fbr() {
   local branches branch
@@ -246,3 +242,7 @@ fkill() {
     echo $pid | xargs kill -${1:-9}
   fi
 }
+
+export LC_ALL="en_US.UTF-8"
+export GOPATH="$HOME/go"
+export "PATH=$PATH:$GOPATH/bin"
