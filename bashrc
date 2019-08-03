@@ -246,3 +246,5 @@ fkill() {
 export LC_ALL="en_US.UTF-8"
 export GOPATH="$HOME/go"
 export "PATH=$PATH:$GOPATH/bin"
+
+export TERM=screen-256color
