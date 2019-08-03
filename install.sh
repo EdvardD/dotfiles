@@ -48,6 +48,7 @@ echo Install dotfiles
 cp bashrc ~/.bashrc
 cp vimrc ~/.vimrc
 cp gitconfig ~/.gitconfig
+cp tmux.conf ~/.tmux.conf
 mkdir -p ~/bin
 cp build ~/bin/
 
