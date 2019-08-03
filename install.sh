@@ -23,6 +23,7 @@ if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get --assume-yes install tmux
   sudo apt-get --assume-yes install gdb
   sudo apt-get --assume-yes install htop
+  sudo apt-get --assume-yes install tig
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
   brew install vim || brew upgrade vim
