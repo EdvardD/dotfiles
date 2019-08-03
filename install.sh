@@ -21,6 +21,7 @@ if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get --assume-yes install python3-pip
   sudo apt-get --assume-yes install curl
   sudo apt-get --assume-yes install tmux
+  sudo apt-get --assume-yes install gdb
 elif [[ "$os_name" == "Darwin" ]]; then
   brew install cmake || brew upgrade cmake
   brew install vim || brew upgrade vim
