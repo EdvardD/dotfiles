@@ -152,27 +152,27 @@ dif() {
 
 acc() {
   clear;
-  command ack -C 1 --type=cpp -i "$@";
+  command ack --ignore-dir=externals --ignore-dir=build -C 1 --type=cpp -i "$@";
 }
 
 ac() {
   clear;
-  command ack -C 1 -i "$@";
+  command ack --ignore-dir=externals --ignore-dir=build -C 1 -i "$@";
 }
 
 function replace_all() {
   clear;
-  ack --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
+  ack --ignore-dir=externals --ignore-dir=build --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
 }
 
 function replace_all_json() {
   clear;
-  ack --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
+  ack --ignore-dir=externals --ignore-dir=build --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
 }
 
 function replace_all_cpp() {
   clear;
-  ack --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
+  ack --ignore-dir=externals --ignore-dir=build --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i "s/$1/$2/g";
 }
 
 # To use ctrl-r to do forward search by commands
@@ -190,9 +190,9 @@ pull_master() {
 
 find_and_open() {
   if [ $# -le 1 ]; then
-    file_list=$(ack -l "$1")
+    file_list=$(ack --ignore-dir=externals --ignore-dir=build -l "$1")
   else
-    file_list=$(find . -name "$2" | xargs ack -l "$1")
+    file_list=$(find . -name "$2" | xargs ack --ignore-dir=externals --ignore-dir=build -l "$1")
   fi
   files=""
   for file in $file_list; do
@@ -245,6 +245,6 @@ fkill() {
 
 export LC_ALL="en_US.UTF-8"
 export GOPATH="$HOME/go"
-export "PATH=$PATH:$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 export TERM=screen-256color
