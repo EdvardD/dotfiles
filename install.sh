@@ -36,6 +36,9 @@ elif [[ "$os_name" == "Darwin" ]]; then
   brew install python3 || brew upgrade python3
 fi
 
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 100
+
 mkdir -p ~/tmp
 pushd ~/tmp
 wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc1/cmake-3.16.0-rc1-Linux-x86_64.sh
