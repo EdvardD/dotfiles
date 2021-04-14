@@ -12,7 +12,7 @@ if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get update
   sudo apt-get --assume-yes install cmake
   sudo apt-get --assume-yes install vim
-  sudo apt-get --assume-yes install g++-7
+  sudo apt-get --assume-yes install g++-8
   sudo apt-get --assume-yes install ack-grep
   sudo apt-get --assume-yes install ruby-dev
   sudo apt-get --assume-yes install golang-go
@@ -35,6 +35,15 @@ elif [[ "$os_name" == "Darwin" ]]; then
   brew install python || brew upgrade python
   brew install python3 || brew upgrade python3
 fi
+
+mkdir -p ~/tmp
+pushd ~/tmp
+wget https://github.com/Kitware/CMake/releases/download/v3.16.0-rc1/cmake-3.16.0-rc1-Linux-x86_64.sh
+/bin/sh cmake-3.16.0-rc1-Linux-x86_64.sh --prefix="/" --skip-license
+rm cmake-3.16.0-rc1-Linux-x86_64.sh
+rm /usr/bin/cmake
+ln -s /bin/cmake /usr/bin/cmake
+popd
 
 echo Install Vundle
 rm -rf ~/.vim/bundle
