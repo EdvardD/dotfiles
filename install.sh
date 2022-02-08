@@ -7,7 +7,6 @@ os_name=`uname`
 echo Install cmake, vim, g++, ack and ruby
 if [[ "$os_name" == "Linux" ]]; then
   sudo apt-get install -y software-properties-common
-  sudo add-apt-repository -y ppa:jonathonf/vim
   sudo add-apt-repository -y ppa:longsleep/golang-backports
   sudo apt-get update
   sudo apt-get --assume-yes install cmake vim g++-8 ack-grep ruby-dev golang-go python3 python3-pip curl tmux gdb htop tig
