@@ -150,29 +150,38 @@ dif() {
   git diff "$@";
 }
 
+ack() {
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" "$@";
+}
+
 acc() {
   clear;
-  command ack --ignore-dir=externals --ignore-dir=build -C 1 --type=cpp -i "$@";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" -C 1 --type=cpp -i "$@";
+}
+
+acr() {
+  clear;
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" -C 1 --type=rust -i "$@";
 }
 
 ac() {
   clear;
-  command ack --ignore-dir=externals --ignore-dir=build -C 1 -i "$@";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" -C 1 -i "$@";
 }
 
 function replace_all() {
   clear;
-  ack --ignore-dir=externals --ignore-dir=build --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
 }
 
 function replace_all_json() {
   clear;
-  ack --ignore-dir=externals --ignore-dir=build --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
 }
 
 function replace_all_cpp() {
   clear;
-  ack --ignore-dir=externals --ignore-dir=build --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
 }
 
 # To use ctrl-r to do forward search by commands
@@ -248,6 +257,7 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 export TERM=screen-256color
+. "$HOME/.cargo/env"
 
 function tmux {
     if [ -S "$SSH_AUTH_SOCK" ] && [ ! -h "$SSH_AUTH_SOCK" ]; then
