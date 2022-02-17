@@ -79,7 +79,8 @@ set smartcase
 set hlsearch
 
 " Compiling by F7, running by F9
-nmap <F7> :w<CR>:!g++-7 -Wno-deprecated -Wno-deprecated-declarations -Wall -Wextra -Wconversion -lm -x c++ -DSU1 -O2 -pthread -std=c++17 -o %:r %<CR>
+nmap <F7> :w<CR>:!clang++ -Wno-deprecated -Wno-deprecated-declarations -Wall -Wextra -Wconversion -lm -x c++ -DSU1 -O2 -pthread -std=c++17 -o %:r %<CR>
+nmap <F8> :w<CR>:!rustc %<CR>
 nmap <F9> :!./%:r<CR>
 
 " Ignore special symbols in find/replace
@@ -223,6 +224,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " YCM options.
-nnoremap <C-g> :YcmCompleter GoToImprecise<CR>
+nnoremap <C-g> :YcmCompleter GoToDeclaration<CR>
 set completeopt-=preview " Don't show function/variable preview on the top
 let g:ycm_confirm_extra_conf=0 " Hide notification about found .ycm_extra_conf.py
+let g:ycm_goto_buffer_command='new-tab'
