@@ -257,7 +257,7 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 export TERM=screen-256color
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 
 function tmux {
     if [ -S "$SSH_AUTH_SOCK" ] && [ ! -h "$SSH_AUTH_SOCK" ]; then
