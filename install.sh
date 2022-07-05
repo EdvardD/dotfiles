@@ -19,13 +19,13 @@ echo Install Vundle
 rm -rf ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-echo Install YCM
-rm -rf ~/.vim/bundle/YouCompleteMe
-git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
-cd ~/.vim/bundle/YouCompleteMe
-git submodule update --init --recursive
-python3 install.py --clang-completer --gocode-completer --rust-completer
-cd $DIR/dotfiles
+# echo Install YCM
+# rm -rf ~/.vim/bundle/YouCompleteMe
+# git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
+# cd ~/.vim/bundle/YouCompleteMe
+# git submodule update --init --recursive
+# python3 install.py --clang-completer --gocode-completer --rust-completer
+# cd $DIR/dotfiles
 
 echo Install dotfiles
 cp bashrc ~/.bashrc
