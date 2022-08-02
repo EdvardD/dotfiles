@@ -57,7 +57,7 @@ rm -rf ~/.vim/bundle/YouCompleteMe
 git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
 cd ~/.vim/bundle/YouCompleteMe
 git submodule update --init --recursive
-git co aec79589040497cd0cb0701e089d8d80dc6de996
+git checkout aec79589040497cd0cb0701e089d8d80dc6de996
 python3 install.py --clang-completer --gocode-completer
 cd $DIR/dotfiles
 
