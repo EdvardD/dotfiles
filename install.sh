@@ -58,7 +58,7 @@ git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouComplet
 cd ~/.vim/bundle/YouCompleteMe
 git checkout aec79589040497cd0cb0701e089d8d80dc6de996
 git submodule update --init --recursive
-python3 install.py --clang-completer --gocode-completer
+python3 install.py --clang-completer
 cd $DIR/dotfiles
 
 echo Install dotfiles
