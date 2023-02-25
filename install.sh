@@ -50,7 +50,7 @@ popd
 
 echo Install Vundle
 rm -rf ~/.vim/bundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+git clone https://github.com/svermeulen/vundle.git ~/.vim/bundle/Vundle.vim
 
 echo Install YCM
 rm -rf ~/.vim/bundle/YouCompleteMe
