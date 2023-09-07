@@ -12,6 +12,7 @@ if [[ "$os_name" == "Linux" ]]; then
   fi
   sudo apt-get update
   sudo apt-get -y install cmake vim ack-grep ruby-dev golang-go python3 python3-pip curl tmux gdb htop tig
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # Install Rust
   if [[ "$(lsb_release -d)" == *"18.04"* ]]; then
     sudo apt-get -y install g++-8
   fi
