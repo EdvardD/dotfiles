@@ -171,17 +171,17 @@ ac() {
 
 function replace_all() {
   clear;
-  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --print0 -irl "$1" | xargs -0 -L1 sed -i -E "s|$1|$2|g";
 }
 
 function replace_all_json() {
   clear;
-  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=json --print0 -irl "$1" | xargs -0 -L1 sed -i -E "s|$1|$2|g";
 }
 
 function replace_all_cpp() {
   clear;
-  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i "s|$1|$2|g";
+  command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" --type=cpp --print0 -irl "$1" | xargs -0 -L1 sed -i -E "s|$1|$2|g";
 }
 
 # To use ctrl-r to do forward search by commands
