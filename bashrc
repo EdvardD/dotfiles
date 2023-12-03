@@ -120,36 +120,6 @@ fi
 trap 'pwd  > ~/.lastdir' EXIT
 [ -s ~/.lastdir ] && cd "`cat ~/.lastdir`"
 
-cd() { builtin cd "$@" && ls; }
-.() {
-  builtin cd .;
-
-  ls;
-  if [ -d .git ]; then
-    git st;
-  fi
-
-  echo
-  jobs;
-}
-..() { builtin cd .. && ls; }
-../..() { builtin cd ../.. && ls; }
-../../..() { builtin cd ../../.. && ls; }
-../../../..() { builtin cd ../../../.. && ls; }
-../../../../..() { builtin cd ../../../../.. && ls; }
-../../../../../..() { builtin cd ../../../../../.. && ls; }
-../../../../../../..() { builtin cd ../../../../../../.. && ls; }
-
-st() {
-  clear;
-  git st;
-}
-
-dif() {
-  clear;
-  git diff "$@";
-}
-
 ack() {
   command ack --ignore-dir=externals --ignore-dir=build --ignore-dir=".git" "$@";
 }
@@ -192,69 +162,11 @@ stash_drop() {
   git stash drop;
 }
 
-pull_master() {
-  git checkout master;
-  git pull;
-}
-
 st() {
   git status -uno;
 }
 
-find_and_open() {
-  if [ $# -le 1 ]; then
-    file_list=$(ack --ignore-dir=externals --ignore-dir=build -l "$1")
-  else
-    file_list=$(find . -name "$2" | xargs ack --ignore-dir=externals --ignore-dir=build -l "$1")
-  fi
-  files=""
-  for file in $file_list; do
-    files="$files$file "
-  done
-  if [ "$files" != "" ]; then
-    vim $files
-  fi
-}
-
-ssh() {
-  command ssh -Y -A "$@";
-}
-
-short_test() {
-  go test ./... -short;
-}
-
-full_test() {
-  go test ./...;
-}
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-fbr() {
-  local branches branch
-  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-}
-
-fbr_all() {
-  local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-}
-
-fkill() {
-  local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]
-  then
-    echo $pid | xargs kill -${1:-9}
-  fi
-}
 
 export LC_ALL="en_US.UTF-8"
 export GOPATH="$HOME/go"
@@ -269,3 +181,7 @@ function tmux {
     fi
     SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock command tmux "$@"
 }
+
+# >>> xmake >>>
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
+# <<< xmake <<<
