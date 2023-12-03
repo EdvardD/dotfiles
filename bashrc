@@ -197,6 +197,10 @@ pull_master() {
   git pull;
 }
 
+st() {
+  git status -uno;
+}
+
 find_and_open() {
   if [ $# -le 1 ]; then
     file_list=$(ack --ignore-dir=externals --ignore-dir=build -l "$1")
